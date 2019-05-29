@@ -117,12 +117,9 @@
     ?>
 
     <?php if( $the_query->have_posts() ): ?>
-
+    <?php $i=0 ?>
     <div class="container">
       <?php while( $the_query->have_posts() ) : $the_query->the_post(); ?>
-      <?php
-          $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-        ?>
 
       <div class="row">
         <div class="col-md-4">
@@ -133,26 +130,31 @@
               <span class="JNK__link"><?php the_field('project_button'); ?></span>
             </div>
           </a>
-        </div> 
+        </div>
         <div class="col-md-8">
-          <div class="card__bg-color">
+          <div class="card__bg-color card-<?php echo $i ?>">
+
+            <?php $image = wp_get_attachment_image_src(get_field('project_image'), 'full'); ?>
+
             <style>
-              .card__bg-color:after{
+              .card-<?php echo $i ?>:after{
                   background-image: url('<?php echo $image[0]; ?>');
               }
             </style>
           </div>
         </div>
       </div>
-    <?php endwhile; ?>
-    <?php endif; ?>
-    <?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 
 
+      <?php $i++; ?>
+      <?php endwhile; ?>
+      <?php endif; ?>
+      <?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 
       <div class="text-align-center">
-        <a href="projects.html" class="JNK__link">More projects ?</a>
+        <a href="projects.html" class="JNK__link">More projects</a>
       </div>
+
     </div>
   </section>
 

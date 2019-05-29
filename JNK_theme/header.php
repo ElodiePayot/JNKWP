@@ -43,7 +43,21 @@
     <header class="page-header">
       <div class="container">
         <nav class="navbar">
-          <a class="navbar-brand ml-auto" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/JNK_menu.svg" alt="menu" /></a>
+          <?php
+          wp_nav_menu([
+            'menu'            => 'top',
+            'theme_location'  => 'top',
+            'container'       => 'div',
+            'container_id'    => 'bs4navbar',
+            'container_class' => 'collapse navbar-collapse ml-auto',
+            'menu_id'         => false,
+            'menu_class'      => 'navbar-nav',
+            'depth'           => 2,
+            'fallback_cb'     => 'bs4navwalker::fallback',
+            'walker'          => new bs4navwalker()
+          ]);
+          ?>
+
         </nav>
       </div>
     </header>
